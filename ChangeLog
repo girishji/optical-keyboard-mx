@@ -1,18 +1,33 @@
 Author: Girish Palya <girishji@gmail.com>
-Date:   Thu, 11 Aug 2022 15:27:09 +0200
+Date:   Fri, 12 Aug 2022 00:38:38 +0200
 
-Added traces through python script
+Python scripts to add curved tracks
 
+Script to place mouting holes, draw edge cuts.
 
-
-D  MyFootprints.pretty/Gateron_Sw_1.25u.kicad_mod
-D  MyFootprints.pretty/Gateron_Sw_1.5u.kicad_mod
-D  MyFootprints.pretty/Gateron_Sw_1.75u.kicad_mod
-M  MyFootprints.pretty/Gateron_Sw_1u.kicad_mod
-D  MyFootprints.pretty/Gateron_Switch_Basic.kicad_mod
+A  MyFootprints.pretty/SMTSO_M1.6.kicad_mod
+A  MyFootprints.pretty/SMTSO_M2.kicad_mod
+A  drawborder.py
 M  optical-keyboard-mx.kicad_pcb
 M  optical-keyboard-mx.kicad_prl
+M  optical-keyboard-mx.kicad_sch
+A  placeholes.py
 M  placemx.py
+
+commit 74631685d3a7cdd368ac5c8ef55fd6c1ef0513a2
+Author: Girish Palya <girishji@gmail.com>
+Date:   Thu Aug 11 15:27:09 2022 +0200
+
+    Added traces through python script
+    
+    D  MyFootprints.pretty/Gateron_Sw_1.25u.kicad_mod
+    D  MyFootprints.pretty/Gateron_Sw_1.5u.kicad_mod
+    D  MyFootprints.pretty/Gateron_Sw_1.75u.kicad_mod
+    M  MyFootprints.pretty/Gateron_Sw_1u.kicad_mod
+    D  MyFootprints.pretty/Gateron_Switch_Basic.kicad_mod
+    M  optical-keyboard-mx.kicad_pcb
+    M  optical-keyboard-mx.kicad_prl
+    M  placemx.py
 
 commit d18c69a324ea01c01c845d1fe4b5087e4caf61c9
 Author: Girish Palya <girishji@gmail.com>
