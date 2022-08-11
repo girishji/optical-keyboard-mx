@@ -1,42 +1,56 @@
 Author: Girish Palya <girishji@gmail.com>
-Date:   Tue, 09 Aug 2022 23:53:56 +0200
+Date:   Thu, 11 Aug 2022 15:27:09 +0200
+
+Added traces through python script
 
 
 
+D  MyFootprints.pretty/Gateron_Sw_1.25u.kicad_mod
+D  MyFootprints.pretty/Gateron_Sw_1.5u.kicad_mod
+D  MyFootprints.pretty/Gateron_Sw_1.75u.kicad_mod
+M  MyFootprints.pretty/Gateron_Sw_1u.kicad_mod
+D  MyFootprints.pretty/Gateron_Switch_Basic.kicad_mod
+M  optical-keyboard-mx.kicad_pcb
+M  optical-keyboard-mx.kicad_prl
+M  placemx.py
 
-M  .gitignore
-A  MyFootprints.pretty/AdafruitCharliplex2.kicad_mod
-A  MyFootprints.pretty/BlackPill_STLINK.kicad_mod
-A  MyFootprints.pretty/BlackPill_STLINK2.kicad_mod
-A  MyFootprints.pretty/BlackPill_STLINK_Down.kicad_mod
-A  MyFootprints.pretty/Everlight_IR_IR12-21C_TR8.kicad_mod
-A  MyFootprints.pretty/Everlight_PT_PT12-21C_TR8.kicad_mod
-A  MyFootprints.pretty/Gateron_Optical_Switch.kicad_mod
-A  MyFootprints.pretty/Gateron_Sw_1.25u.kicad_mod
-A  MyFootprints.pretty/Gateron_Sw_1.5u.kicad_mod
-A  MyFootprints.pretty/Gateron_Sw_1.75u.kicad_mod
-A  MyFootprints.pretty/Gateron_Sw_1u.kicad_mod
-A  MyFootprints.pretty/Gateron_Switch_Basic.kicad_mod
-A  MyFootprints.pretty/MountingHole_1.2mm_M1.kicad_mod
-A  MyFootprints.pretty/MountingHole_2.2mm_M2.kicad_mod
-A  MyFootprints.pretty/MountingHole_2.2mm_M2_jlcpcb.kicad_mod
-A  MyFootprints.pretty/Switch_Cutout.kicad_mod
-A  MyFootprints.pretty/Switch_Cutout_1.25u.kicad_mod
-A  MyFootprints.pretty/Switch_Cutout_1.5u.kicad_mod
-A  MyFootprints.pretty/Switch_Cutout_1.75u.kicad_mod
-A  MyFootprints.pretty/TestPoint_Plated_Hole_D1.2mm.kicad_mod
-A  MyFootprints.pretty/TestPoint_THTPad_1.0x1.5mm_Drill0.5mm.kicad_mod
-A  MyFootprints.pretty/TestPoint_THTPad_1.0x2.5mm_Drill0.5mm.kicad_mod
-A  MySymbols.kicad_sym
-A  fp-lib-table
-A  led_driver.kicad_sch
-A  optical-keyboard-mx.kicad_pcb
-A  optical-keyboard-mx.kicad_prl
-A  optical-keyboard-mx.kicad_pro
-A  optical-keyboard-mx.kicad_sch
-A  placemx.py
-A  switch.kicad_sch
-A  sym-lib-table
+commit d18c69a324ea01c01c845d1fe4b5087e4caf61c9
+Author: Girish Palya <girishji@gmail.com>
+Date:   Tue Aug 9 23:53:56 2022 +0200
+
+    M  .gitignore
+    A  MyFootprints.pretty/AdafruitCharliplex2.kicad_mod
+    A  MyFootprints.pretty/BlackPill_STLINK.kicad_mod
+    A  MyFootprints.pretty/BlackPill_STLINK2.kicad_mod
+    A  MyFootprints.pretty/BlackPill_STLINK_Down.kicad_mod
+    A  MyFootprints.pretty/Everlight_IR_IR12-21C_TR8.kicad_mod
+    A  MyFootprints.pretty/Everlight_PT_PT12-21C_TR8.kicad_mod
+    A  MyFootprints.pretty/Gateron_Optical_Switch.kicad_mod
+    A  MyFootprints.pretty/Gateron_Sw_1.25u.kicad_mod
+    A  MyFootprints.pretty/Gateron_Sw_1.5u.kicad_mod
+    A  MyFootprints.pretty/Gateron_Sw_1.75u.kicad_mod
+    A  MyFootprints.pretty/Gateron_Sw_1u.kicad_mod
+    A  MyFootprints.pretty/Gateron_Switch_Basic.kicad_mod
+    A  MyFootprints.pretty/MountingHole_1.2mm_M1.kicad_mod
+    A  MyFootprints.pretty/MountingHole_2.2mm_M2.kicad_mod
+    A  MyFootprints.pretty/MountingHole_2.2mm_M2_jlcpcb.kicad_mod
+    A  MyFootprints.pretty/Switch_Cutout.kicad_mod
+    A  MyFootprints.pretty/Switch_Cutout_1.25u.kicad_mod
+    A  MyFootprints.pretty/Switch_Cutout_1.5u.kicad_mod
+    A  MyFootprints.pretty/Switch_Cutout_1.75u.kicad_mod
+    A  MyFootprints.pretty/TestPoint_Plated_Hole_D1.2mm.kicad_mod
+    A  MyFootprints.pretty/TestPoint_THTPad_1.0x1.5mm_Drill0.5mm.kicad_mod
+    A  MyFootprints.pretty/TestPoint_THTPad_1.0x2.5mm_Drill0.5mm.kicad_mod
+    A  MySymbols.kicad_sym
+    A  fp-lib-table
+    A  led_driver.kicad_sch
+    A  optical-keyboard-mx.kicad_pcb
+    A  optical-keyboard-mx.kicad_prl
+    A  optical-keyboard-mx.kicad_pro
+    A  optical-keyboard-mx.kicad_sch
+    A  placemx.py
+    A  switch.kicad_sch
+    A  sym-lib-table
 
 commit ccd892b1545e03e33ed9251837dea5ae0b658a20
 Author: girishp <girishji@gmail.com>

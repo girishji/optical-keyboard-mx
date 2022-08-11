@@ -1,11 +1,14 @@
-# Place footprints console script
+# Copyright (C) 2022 Girish Palya <girishji@gmail.com>
+# License: https://opensource.org/licenses/MIT
+#
+# Console script to place footprints
 #
 # To run as script in python console,
 #   place or symplink this script to ~/Documents/KiCad/6.0/scripting/plugins
-#   Run from python console using 'import placemx'
+#   Run from python console using 'import filename'
 #   To reapply:
 #     import importlib
-#     importlib.reload(placemx)
+#     importlib.reload(filename)
 #  OR
 #    exec(open("path-to-script-file").read())
 
@@ -24,7 +27,7 @@ class Switch:
         "M": (0, -5.1),
     }
 
-    _arc_radius = 1.5 * 1e6
+    _radius = 1.5 * 1e6
 
     def __init__(self, board, num) -> None:
         if not board and not num:
@@ -45,69 +48,14 @@ class Switch:
         self.footprints["RL"].SetOrientation(-90 * 10)  # 1/10 of degree
         self.footprints["M"].SetOrientation(0 * 10)  # 1/10 of degree
 
-    @staticmethod
-    def add_track(start, end, layer=pcbnew.F_Cu):
-        board = pcbnew.GetBoard()
-        track = pcbnew.PCB_TRACK(board)
-        track.SetStart(start)
-        track.SetEnd(end)
-        track.SetWidth(int(0.3 * 1e6))
-        track.SetLayer(layer)
-        board.Add(track)
-
-    @staticmethod
-    def add_arc(start, end, mid, layer=pcbnew.F_Cu):
-        board = pcbnew.GetBoard()
-        track = pcbnew.PCB_ARC(board)
-        track.SetStart(start)
-        track.SetEnd(end)
-        track.SetMid(mid)
-        if track.GetAngle() < 0:
-            track = pcbnew.PCB_TRACK(board)
-            track.SetStart(start)
-            track.SetEnd(end)
-        track.SetWidth(int(0.3 * 1e6))
-        track.SetLayer(layer)
-        board.Add(track)
-
     def get_pad_center(self, fp, pad_num):
         return self.footprints[fp].FindPadByNumber(str(pad_num)).GetCenter()
-
-    # def get_track_end(self, fp, pad_num, dist, orient=0):
-    #     start = self.get_pad_point(fp, pad_num)
-    #     deg = self.footprints[fp].GetOrientation() // 10
-    #     d = dist * 1e6  # mm
-    #     deg = 90 + deg + orient
-    #     return pcbnew.wxPoint(
-    #         start.x + d * math.cos(math.radians(deg)),
-    #         start.y - d * math.sin(math.radians(deg)),
-    #     )
-
-    # def orient_point(point):
-    #     deg = self.footprints[fp].GetOrientation() // 10
-    #     deg = 90 + deg + orient
-    #     return pcbnew.wxPoint(
-    #         point.x + d * math.cos(math.radians(deg)),
-    #         point.y - d * math.sin(math.radians(deg)),
-    #     )
-
-    @staticmethod
-    def add_arc_from(
-        point, ex, ey, mx, my, reverse=False, d=_arc_radius, layer=pcbnew.F_Cu
-    ):
-        end = pcbnew.wxPoint(point.x + (d if ex else -d), point.y + (d if ey else -d))
-        mid = pcbnew.wxPoint(point.x + (d if mx else -d), point.y + (d if my else -d))
-        if reverse:
-            Switch.add_arc(end, point, mid, layer)
-        else:
-            Switch.add_arc(point, end, mid, layer)
-        return end
 
     def add_tracks(self):
         sta = self.get_pad_center("D", 2)
         end = self.get_pad_center("RL", 2)
         r = end.y - sta.y
-        Switch.add_track(Switch.add_arc_from(sta, 1, 1, 1, 0, True, d=r), end)
+        add_track(add_arc_from(sta, 1, 1, 1, 0, True, d=r), end)
 
     def place(self, offset):
         for fp in self._pos.keys():
@@ -115,12 +63,6 @@ class Switch:
                 Switch._pos[fp][0] + offset[0], Switch._pos[fp][1] + offset[1]
             )
             self.footprints[fp].SetPosition(p)
-
-    @staticmethod
-    def place_fp(offset, fp, pos, orient):
-        fp.SetOrientation(orient * 10)  # 1/10 of degree
-        p = pcbnew.wxPointMM(pos[0] + offset[0], pos[1] + offset[1])
-        fp.SetPosition(p)
 
     def rotate(self, deg):
         p = self.footprints["S"].GetPosition()
@@ -134,7 +76,7 @@ class Keyboard(object):
         board = pcbnew.GetBoard()
         for i in range(1, 75):
             self.switches.append(Switch(board, i))
-        self.DIM = 19.05
+        self.DIM = 19
         self.RP = [
             board.FindFootprintByReference("RP" + str(fp))
             for fp in [1] + list(range(1, 6))
@@ -148,7 +90,7 @@ class Keyboard(object):
         # row 1
         for i in range(1, 16):
             self.switches[i].place((i * dim, 0))
-        Switch.place_fp((4 * dim, 0), self.RP[1], rp_pos, 90)
+        place_fp((4 * dim, 0), self.RP[1], rp_pos, 90)
 
         # row 2
         offs = dim + dim / 4
@@ -156,7 +98,7 @@ class Keyboard(object):
         for i in range(17, 29):
             self.switches[i].place((offs + dim / 4 + (i - 16) * dim, dim))
         self.switches[29].place((offs + dim / 4 + dim * 13 + dim / 4, dim))
-        Switch.place_fp((offs + dim / 4 + 3 * dim, dim), self.RP[2], rp_pos, 90)
+        place_fp((offs + dim / 4 + 3 * dim, dim), self.RP[2], rp_pos, 90)
 
         # row 3
         self.switches[30].place((dim / 2 + dim / 4, 2 * dim))
@@ -164,10 +106,10 @@ class Keyboard(object):
         offs = 3 * dim / 2 + dim / 4
         for i in range(32, 43):
             self.switches[i].place((offs + (i - 31) * dim, 2 * dim))
-        Switch.place_fp((offs + 2 * dim, 2 * dim), self.RP[3], rp_pos, 90)
-        offs += 12 * dim + dim / 4
+        place_fp((offs + 2 * dim, 2 * dim), self.RP[3], rp_pos, 90)
+        offs += 12 * dim + dim / 8
         self.switches[43].place((offs, 2 * dim))
-        self.switches[44].place((offs + dim + dim / 4 + dim / 8, 2 * dim))
+        self.switches[44].place((offs + dim + dim / 8, 2 * dim))
 
         # row 4
         offs = dim * (0.5 + 0.75 / 2)
@@ -175,7 +117,7 @@ class Keyboard(object):
         offs += dim + dim * 0.75 / 2
         for i in range(46, 57):
             self.switches[i].place((offs + (i - 46) * dim, 3 * dim))
-        Switch.place_fp((offs + 2 * dim, 3 * dim), self.RP[4], rp_pos, 90)
+        place_fp((offs + 2 * dim, 3 * dim), self.RP[4], rp_pos, 90)
         offs += dim * 11
         self.switches[57].place((offs + dim / 8, 3 * dim))
         offs += dim * 1.25
@@ -187,7 +129,7 @@ class Keyboard(object):
             self.switches[i].place((dim / 2 + (i - 60) * dim + dim / 4, 4 * dim))
         offs = dim / 2 + dim * 3
         self.switches[63].place((offs + dim / 4, 4 * dim))
-        Switch.place_fp((offs + dim / 4, 4 * dim), self.RP[5], rp_pos, 90)
+        place_fp((offs + dim / 4, 4 * dim), self.RP[5], rp_pos, 90)
         self.switches[64].place((offs + dim * 1.25 + dim / 8, 4 * dim))
         offs += dim * 1.25 * 2
         self.switches[65].place((offs - 1.5, 4.5 * dim + 4))
@@ -202,12 +144,12 @@ class Keyboard(object):
             self.switches[i].place((offs + (i - 67) * dim, 4 * dim))
 
         bp = board.FindFootprintByReference("U1")
-        bp.SetOrientation(90 * 10)  # 1/10 of degree
-        bp.SetPosition(pcbnew.wxPointMM(dim + 4, 5 * dim - 1.25))
+        bp.SetOrientation(0 * 10)  # 1/10 of degree
+        bp.SetPosition(pcbnew.wxPointMM(-6, 3 * dim - 1))
 
         bp = board.FindFootprintByReference("U2")
         bp.SetOrientation(45 * 10)  # 1/10 of degree
-        bp.SetPosition(pcbnew.wxPointMM(dim * 8, 4 * dim - 5.25))
+        bp.SetPosition(pcbnew.wxPointMM(dim * 8, 4 * dim - 4.5))
 
         for i in range(1, 5):
             fp = board.FindFootprintByReference("R" + str(i))
@@ -253,7 +195,7 @@ class Keyboard(object):
             if not vertical
             else pcbnew.wxPoint(point.x, point.y + offset * 1e6)
         )
-        Switch.add_track(point, end)
+        add_track(point, end)
         self.add_via(end)
         return end
 
@@ -264,7 +206,6 @@ class Keyboard(object):
             if i not in [65, 67]:
                 self.switches[i].add_tracks()
 
-        # rows
         for i in itertools.chain(
             range(1, 15),
             range(16, 29),
@@ -273,48 +214,47 @@ class Keyboard(object):
             range(60, 64),
             range(68, 74),
         ):
-            sw1 = self.switches[i]
-            start = sw1.get_pad_center("Q", 1)
-            sw2 = self.switches[i + 1]
-            start2 = sw2.get_pad_center("Q", 1)
-            Switch.add_track(
-                Switch.add_arc_from(start, 1, 0, 1, 1),
-                Switch.add_arc_from(start2, 0, 0, 0, 1, True),
-            )
 
-            corner = [8, 23, 38, 53]
+            sta = self.switches[i].get_pad_center("Q", 1)
+            sta1 = add_arc_from(sta, 1, 0, 1, 1)
+            end = self.switches[i + 1].get_pad_center("Q", 1)
+            end1 = add_arc_from(end, 0, 0, 0, 1, True)
+            add_track(sta1, end1)
+
+            # LEDs
+            corner = [8, 23, 37, 52]
             if i not in corner:
-                start = sw1.get_pad_center("M", 1)
+                start = self.switches[i].get_pad_center("M", 1)
                 sta = pcbnew.wxPoint(start.x, start.y - 0.5 * 1e6)
-                Switch.add_track(sta, start)
-                end = Switch.add_arc_from(sta, True, False, True, True)
+                add_track(sta, start)
+                end = add_arc_from(sta, True, False, True, True)
 
-                start = sw2.get_pad_center("M", 1)
+                start = self.switches[i + 1].get_pad_center("M", 1)
                 sta = pcbnew.wxPoint(start.x, start.y - 0.5 * 1e6)
                 if i + 1 in corner + [15, 29, 45, 60, 75]:
-                    Switch.add_track(sta, start)
-                end2 = Switch.add_arc_from(sta, False, False, False, True, True)
-                Switch.add_track(end, end2)
+                    add_track(sta, start)
+                end2 = add_arc_from(sta, False, False, False, True, True)
+                add_track(end, end2)
 
         # columns
         def connect(sta, end, straight_end=False):
             if sta.x < end.x:
-                end2 = Switch.add_arc_from(sta, 1, 1, 1, 0, True, layer=pcbnew.B_Cu)
+                end2 = add_arc_from(sta, 1, 1, 1, 0, True, layer=pcbnew.B_Cu)
                 end3 = (
                     end
                     if straight_end
-                    else Switch.add_arc_from(end, 0, 0, 0, 1, True, layer=pcbnew.B_Cu)
+                    else add_arc_from(end, 0, 0, 0, 1, True, layer=pcbnew.B_Cu)
                 )
             elif sta.x > end.x:
-                end2 = Switch.add_arc_from(sta, 0, 1, 0, 0, layer=pcbnew.B_Cu)
+                end2 = add_arc_from(sta, 0, 1, 0, 0, layer=pcbnew.B_Cu)
                 end3 = (
                     end
                     if straight_end
-                    else Switch.add_arc_from(end, 1, 0, 1, 1, layer=pcbnew.B_Cu)
+                    else add_arc_from(end, 1, 0, 1, 1, layer=pcbnew.B_Cu)
                 )
             else:
                 end2, end3 = sta, end
-            Switch.add_track(end2, end3, pcbnew.B_Cu)
+            add_track(end2, end3, pcbnew.B_Cu)
 
         exclude = [65, 67, -1]
         for i1, i2, i3, i4, i5 in list(
@@ -336,17 +276,17 @@ class Keyboard(object):
                 if st in exclude or en in exclude:
                     continue
                 sta = vias[st]
-                end = Switch.add_arc_from(sta, 0, 1, 1, 1, True, layer=pcbnew.B_Cu)
+                end = add_arc_from(sta, 0, 1, 1, 1, True, layer=pcbnew.B_Cu)
                 end2 = pcbnew.wxPoint(
                     end.x, sta.y + (drop if st != 15 else drop + self.DIM * 1e6)
                 )
-                Switch.add_track(end, end2, pcbnew.B_Cu)
+                add_track(end, end2, pcbnew.B_Cu)
                 sta = vias[en]
-                end = Switch.add_arc_from(sta, 0, 0, 1, 0, layer=pcbnew.B_Cu)
+                end = add_arc_from(sta, 0, 0, 1, 0, layer=pcbnew.B_Cu)
                 end3 = pcbnew.wxPoint(
-                    end.x, end.y - self.DIM * 1e6 + drop + 3 * Switch._arc_radius
+                    end.x, end.y - self.DIM * 1e6 + drop + 3 * Switch._radius
                 )
-                Switch.add_track(end, end3, pcbnew.B_Cu)
+                add_track(end, end3, pcbnew.B_Cu)
                 connect(end2, end3)
 
         # RPs
@@ -357,32 +297,32 @@ class Keyboard(object):
         for st, en in [(s, s + 1) for s in range(1, 5)]:
             sta = vias[st]
             drop = 7.0 * 1e6 if st in (1, 3) else 8.5 * 1e6
-            end = Switch.add_arc_from(sta, True, True, False, True, layer=pcbnew.B_Cu)
+            end = add_arc_from(sta, True, True, False, True, layer=pcbnew.B_Cu)
             end2 = pcbnew.wxPoint(end.x, sta.y + drop)
-            Switch.add_track(end, end2, pcbnew.B_Cu)
+            add_track(end, end2, pcbnew.B_Cu)
             sta = vias[en]
-            end = Switch.add_arc_from(sta, 1, 0, 0, 0, True, layer=pcbnew.B_Cu)
+            end = add_arc_from(sta, 1, 0, 0, 0, True, layer=pcbnew.B_Cu)
             end3 = pcbnew.wxPoint(
-                end.x, end.y - self.DIM * 1e6 + drop + 3 * Switch._arc_radius
+                end.x, end.y - self.DIM * 1e6 + drop + 3 * Switch._radius
             )
-            Switch.add_track(end, end3, pcbnew.B_Cu)
+            add_track(end, end3, pcbnew.B_Cu)
             connect(end2, end3)
 
         # LED matrix
         for st, en in zip(range(2, 16), range(17, 30)):
             vst = self.via_track(self.switches[st].get_pad_center("M", 2), offset=3)
-            end1 = Switch.add_arc_from(vst, 1, 1, 0, 1, layer=pcbnew.B_Cu)
+            end1 = add_arc_from(vst, 1, 1, 0, 1, layer=pcbnew.B_Cu)
             if st == 9:
                 ven = self.via_track(self.switches[en].get_pad_center("M", 1))
-                end3 = pcbnew.wxPoint(end1.x, ven.y - Switch._arc_radius)
-                Switch.add_track(end1, end3, pcbnew.B_Cu)
+                end3 = pcbnew.wxPoint(end1.x, ven.y - Switch._radius)
+                add_track(end1, end3, pcbnew.B_Cu)
                 connect(end3, ven, True)
             else:
                 ven = self.via_track(
                     self.switches[en].get_pad_center("M", 2), vertical=True, offset=-1.2
                 )
-                end3 = pcbnew.wxPoint(end1.x, ven.y - 2 * Switch._arc_radius)
-                Switch.add_track(end1, end3, pcbnew.B_Cu)
+                end3 = pcbnew.wxPoint(end1.x, ven.y - 2 * Switch._radius)
+                add_track(end1, end3, pcbnew.B_Cu)
                 connect(end3, ven)
 
         for st, en in list(zip(range(18, 25), range(32, 39))) + list(
@@ -393,35 +333,35 @@ class Keyboard(object):
             vst = self.via_track(
                 self.switches[st].get_pad_center("M", 2), vertical=True, offset=1.2
             )
-            end1 = Switch.add_arc_from(vst, 0, 1, 0, 0, layer=pcbnew.B_Cu)
+            end1 = add_arc_from(vst, 0, 1, 0, 0, layer=pcbnew.B_Cu)
             ven = self.via_track(
                 self.switches[en].get_pad_center("M", 2), vertical=True, offset=-1.2
             )
-            end2 = Switch.add_arc_from(ven, 1, 0, 1, 1, layer=pcbnew.B_Cu)
+            end2 = add_arc_from(ven, 1, 0, 1, 1, layer=pcbnew.B_Cu)
             end3 = pcbnew.wxPoint(end2.x + 1 * 1e6, end2.y)
-            Switch.add_track(end2, end3, pcbnew.B_Cu)
-            end4 = Switch.add_arc_from(end3, 1, 0, 0, 0, True, layer=pcbnew.B_Cu)
-            end5 = pcbnew.wxPoint(end4.x, end1.y + Switch._arc_radius)
-            Switch.add_track(end4, end5, pcbnew.B_Cu)
-            end6 = Switch.add_arc_from(end5, 1, 0, 1, 1, layer=pcbnew.B_Cu)
-            Switch.add_track(end6, end1, pcbnew.B_Cu)
+            add_track(end2, end3, pcbnew.B_Cu)
+            end4 = add_arc_from(end3, 1, 0, 0, 0, True, layer=pcbnew.B_Cu)
+            end5 = pcbnew.wxPoint(end4.x, end1.y + Switch._radius)
+            add_track(end4, end5, pcbnew.B_Cu)
+            end6 = add_arc_from(end5, 1, 0, 1, 1, layer=pcbnew.B_Cu)
+            add_track(end6, end1, pcbnew.B_Cu)
 
         for st, en in zip(range(30, 45), range(45, 60)):
             if st in (32, 40):
                 continue
             vst = self.via_track(self.switches[st].get_pad_center("M", 2), offset=2.5)
-            end1 = Switch.add_arc_from(vst, 1, 1, 0, 1, layer=pcbnew.B_Cu)
+            end1 = add_arc_from(vst, 1, 1, 0, 1, layer=pcbnew.B_Cu)
             ven = self.via_track(
                 self.switches[en].get_pad_center("M", 2), vertical=True, offset=-1.2
             )
-            if st in (44, 30):
-                end2 = pcbnew.wxPoint(ven.x, ven.y - Switch._arc_radius)
+            if st == 30:
+                end2 = pcbnew.wxPoint(ven.x, ven.y - Switch._radius)
             else:
-                end2 = Switch.add_arc_from(ven, 0, 0, 0, 1, True, layer=pcbnew.B_Cu)
-            end3 = pcbnew.wxPoint(end1.x, end2.y - Switch._arc_radius)
-            Switch.add_track(end1, end3, pcbnew.B_Cu)
-            if st in (44, 30):
-                Switch.add_track(ven, end3, pcbnew.B_Cu)
+                end2 = add_arc_from(ven, 0, 0, 0, 1, True, layer=pcbnew.B_Cu)
+            end3 = pcbnew.wxPoint(end1.x, end2.y - Switch._radius)
+            add_track(end1, end3, pcbnew.B_Cu)
+            if st == 30:
+                add_track(ven, end3, pcbnew.B_Cu)
             else:
                 connect(end3, end2, True)
 
@@ -431,14 +371,14 @@ class Keyboard(object):
             vst = self.via_track(
                 self.switches[st].get_pad_center("M", 2), vertical=True, offset=1.2
             )
-            end1 = Switch.add_arc_from(vst, 0, 1, 0, 0, layer=pcbnew.B_Cu)
+            end1 = add_arc_from(vst, 0, 1, 0, 0, layer=pcbnew.B_Cu)
             ven = self.via_track(
                 self.switches[en].get_pad_center("M", 2), vertical=True, offset=-1.2
             )
-            end2 = pcbnew.wxPoint(ven.x, end1.y + Switch._arc_radius)
-            Switch.add_track(ven, end2, pcbnew.B_Cu)
-            end3 = Switch.add_arc_from(end2, 1, 0, 1, 1, layer=pcbnew.B_Cu)
-            Switch.add_track(end3, end1, pcbnew.B_Cu)
+            end2 = pcbnew.wxPoint(ven.x, end1.y + Switch._radius)
+            add_track(ven, end2, pcbnew.B_Cu)
+            end3 = add_arc_from(end2, 1, 0, 1, 1, layer=pcbnew.B_Cu)
+            add_track(end3, end1, pcbnew.B_Cu)
 
         for st, en in zip(range(53, 60), range(68, 75)):
             if st == 56:
@@ -446,31 +386,23 @@ class Keyboard(object):
             vst = self.via_track(
                 self.switches[st].get_pad_center("M", 2), vertical=True, offset=1.2
             )
-            end1 = Switch.add_arc_from(vst, 0, 1, 0, 0, layer=pcbnew.B_Cu)
+            end1 = add_arc_from(vst, 0, 1, 0, 0, layer=pcbnew.B_Cu)
             ven = self.via_track(
                 self.switches[en].get_pad_center("M", 2), vertical=True, offset=-1.2
             )
-            end2 = Switch.add_arc_from(ven, 0, 0, 0, 1, True, layer=pcbnew.B_Cu)
+            end2 = add_arc_from(ven, 0, 0, 0, 1, True, layer=pcbnew.B_Cu)
             end3 = pcbnew.wxPoint(end1.x - 3 * 1e6, end1.y)
-            Switch.add_track(end1, end3, pcbnew.B_Cu)
-            end4 = Switch.add_arc_from(end3, 0, 1, 1, 1, True, layer=pcbnew.B_Cu)
-            end5 = pcbnew.wxPoint(end4.x, end2.y - Switch._arc_radius)
-            Switch.add_track(end4, end5, pcbnew.B_Cu)
-            end6 = Switch.add_arc_from(end5, 1, 1, 1, 0, True, layer=pcbnew.B_Cu)
-            Switch.add_track(end6, end2, pcbnew.B_Cu)
+            add_track(end1, end3, pcbnew.B_Cu)
+            end4 = add_arc_from(end3, 0, 1, 1, 1, True, layer=pcbnew.B_Cu)
+            end5 = pcbnew.wxPoint(end4.x, end2.y - Switch._radius)
+            add_track(end4, end5, pcbnew.B_Cu)
+            end6 = add_arc_from(end5, 1, 1, 1, 0, True, layer=pcbnew.B_Cu)
+            add_track(end6, end2, pcbnew.B_Cu)
 
         # ground
         for i in range(1, 75):
             self.via_track(self.switches[i].get_pad_center("Q", 2), offset=-1.2)
             self.via_track(self.switches[i].get_pad_center("D", 1), offset=1.2)
-            # sta = self.switches[i].get_pad_point("Q", 2)
-            # end = self.switches[i].get_track_end("Q", 2, -1.5)
-            # Switch.add_track(sta, end)
-            # self.add_via(end)
-            # sta = self.switches[i].get_pad_point("D", 1)
-            # end = self.switches[i].get_track_end("D", 1, -1.5)
-            # Switch.add_track(sta, end)
-            # self.add_via(end)
 
         pcbnew.Refresh()
 
@@ -510,6 +442,49 @@ class Keyboard(object):
         holes[20].SetPosition(pcbnew.wxPointMM(dim * (1 / 4 + 1 / 8), dim * 2.5))
 
         pcbnew.Refresh()
+
+
+def add_track(start, end, layer=pcbnew.F_Cu):
+    board = pcbnew.GetBoard()
+    track = pcbnew.PCB_TRACK(board)
+    track.SetStart(start)
+    track.SetEnd(end)
+    track.SetWidth(int(0.3 * 1e6))
+    track.SetLayer(layer)
+    board.Add(track)
+
+
+def add_arc(start, end, mid, layer=pcbnew.F_Cu):
+    board = pcbnew.GetBoard()
+    track = pcbnew.PCB_ARC(board)
+    track.SetStart(start)
+    track.SetEnd(end)
+    track.SetMid(mid)
+    if track.GetAngle() < 0:
+        track = pcbnew.PCB_TRACK(board)
+        track.SetStart(start)
+        track.SetEnd(end)
+    track.SetWidth(int(0.3 * 1e6))
+    track.SetLayer(layer)
+    board.Add(track)
+
+
+def add_arc_from(
+    point, ex, ey, mx, my, reverse=False, d=Switch._radius, layer=pcbnew.F_Cu
+):
+    end = pcbnew.wxPoint(point.x + (d if ex else -d), point.y + (d if ey else -d))
+    mid = pcbnew.wxPoint(point.x + (d if mx else -d), point.y + (d if my else -d))
+    if reverse:
+        add_arc(end, point, mid, layer)
+    else:
+        add_arc(point, end, mid, layer)
+    return end
+
+
+def place_fp(offset, fp, pos, orient):
+    fp.SetOrientation(orient * 10)  # 1/10 of degree
+    p = pcbnew.wxPointMM(pos[0] + offset[0], pos[1] + offset[1])
+    fp.SetPosition(p)
 
 
 kb = Keyboard()
