@@ -1,18 +1,40 @@
 Author: Girish Palya <girishji@gmail.com>
-Date:   Fri, 12 Aug 2022 00:38:38 +0200
+Date:   Sat, 13 Aug 2022 07:53:07 +0200
 
-Python scripts to add curved tracks
+Add python script to draw edge cuts
 
-Script to place mouting holes, draw edge cuts.
 
-A  MyFootprints.pretty/SMTSO_M1.6.kicad_mod
-A  MyFootprints.pretty/SMTSO_M2.kicad_mod
-A  drawborder.py
+
+M  MyFootprints.pretty/BlackPill_STLINK_Down.kicad_mod
+A  MyFootprints.pretty/MountingHole_1.7mm_M1.6_Pad.kicad_mod
+A  MyFootprints.pretty/MountingHole_2.2mm_M2_ISO7380_Pad.kicad_mod
+A  MyFootprints.pretty/PinHeader_1x04_P2.54mm_Vertical.kicad_mod
+A  MyFootprints.pretty/PinHeader_1x08_P2.54mm_Vertical.kicad_mod
+M  MySymbols.kicad_sym
+M  drawborder.py
+A  mounting-hw.kicad_sch
 M  optical-keyboard-mx.kicad_pcb
 M  optical-keyboard-mx.kicad_prl
+M  optical-keyboard-mx.kicad_pro
 M  optical-keyboard-mx.kicad_sch
-A  placeholes.py
-M  placemx.py
+M  placeholes.py
+
+commit 3df1c7a28eaa5f3ebec7a024c12badf12574b771
+Author: Girish Palya <girishji@gmail.com>
+Date:   Fri Aug 12 00:38:39 2022 +0200
+
+    Python scripts to add curved tracks
+    
+    Script to place mouting holes, draw edge cuts.
+    
+    A  MyFootprints.pretty/SMTSO_M1.6.kicad_mod
+    A  MyFootprints.pretty/SMTSO_M2.kicad_mod
+    A  drawborder.py
+    M  optical-keyboard-mx.kicad_pcb
+    M  optical-keyboard-mx.kicad_prl
+    M  optical-keyboard-mx.kicad_sch
+    A  placeholes.py
+    M  placemx.py
 
 commit 74631685d3a7cdd368ac5c8ef55fd6c1ef0513a2
 Author: Girish Palya <girishji@gmail.com>

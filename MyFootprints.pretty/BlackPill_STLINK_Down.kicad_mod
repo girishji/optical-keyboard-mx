@@ -8,7 +8,7 @@
     (effects (font (size 1 1) (thickness 0.15)))
     (tstamp e690a342-67ba-4d59-b145-fe80cbe20670)
   )
-  (fp_text value "BlackPill" (at -8.89 -27.94 180) (layer "F.Fab")
+  (fp_text value "BlackPill_down" (at -8.89 -27.94 180) (layer "F.Fab")
     (effects (font (size 1 1) (thickness 0.15)))
     (tstamp b42bc5af-40cb-49b9-8d09-3665b7d3969b)
   )

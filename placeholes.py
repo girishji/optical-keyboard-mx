@@ -15,12 +15,14 @@
 import pcbnew
 
 DIM = 19.0
+# BORDER = 2.1
+BORDER = 0.0
 
 
 def add_holes():
     dim = DIM
     delta = 0.5
-    border = 2.1
+    border = BORDER
     board = pcbnew.GetBoard()
     holes = [board.FindFootprintByReference("H1")]  # dummy
     holes += [board.FindFootprintByReference("H" + str(num)) for num in range(1, 21)]
@@ -39,7 +41,7 @@ def add_holes():
     set_position(9, dim * 3.75, dim * 2.5 + delta)
     set_position(10, dim * 7.75, dim * 2.5 + delta)
     set_position(11, dim * 11.75, dim * 2.5 + delta)
-    set_position(12, dim * 15.8, dim * 2.25 + delta)
+    set_position(12, dim * 16.0, dim * 2.5 + delta)
     set_position(13, -dim * 0.3, dim * 4.5 + border)
     set_position(14, dim * 2.25, dim * 4.5 + border)
     set_position(15, dim * 7.25, dim * 4.5 + border)
