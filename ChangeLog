@@ -1,23 +1,63 @@
 Author: Girish Palya <girishji@gmail.com>
-Date:   Sat, 13 Aug 2022 07:53:07 +0200
+Date:   Sun, 14 Aug 2022 00:27:34 +0200
 
-Add python script to draw edge cuts
+More scripts to draw border and place footprint
 
 
 
-M  MyFootprints.pretty/BlackPill_STLINK_Down.kicad_mod
-A  MyFootprints.pretty/MountingHole_1.7mm_M1.6_Pad.kicad_mod
-A  MyFootprints.pretty/MountingHole_2.2mm_M2_ISO7380_Pad.kicad_mod
-A  MyFootprints.pretty/PinHeader_1x04_P2.54mm_Vertical.kicad_mod
-A  MyFootprints.pretty/PinHeader_1x08_P2.54mm_Vertical.kicad_mod
-M  MySymbols.kicad_sym
 M  drawborder.py
-A  mounting-hw.kicad_sch
+M  mounting-hw.kicad_sch
 M  optical-keyboard-mx.kicad_pcb
-M  optical-keyboard-mx.kicad_prl
-M  optical-keyboard-mx.kicad_pro
 M  optical-keyboard-mx.kicad_sch
+M  placefp.py
+ D placefpg.mx
 M  placeholes.py
+
+commit 3dca5732eac3c4038cd8202613fece96977616a2
+Author: Girish Palya <girishji@gmail.com>
+Date:   Sat Aug 13 07:57:56 2022 +0200
+
+    rename file
+    
+    R  placefpg.py -> placefp.py
+     D placefpg.mx
+
+commit add321bd9fe7a09d75971f366c8188faced794bc
+Author: Girish Palya <girishji@gmail.com>
+Date:   Sat Aug 13 07:56:05 2022 +0200
+
+    rename file
+    
+     D placefpg.mx
+    A  placefpg.py
+
+commit 976e9f1f185cdb810a87b8b82373811b9e890954
+Author: Girish Palya <girishji@gmail.com>
+Date:   Sat Aug 13 07:54:53 2022 +0200
+
+    rename file
+    
+    R  placemx.py -> placefpg.mx
+
+commit 57c28ae045d047be48612735ce4d727650ba4e62
+Author: Girish Palya <girishji@gmail.com>
+Date:   Sat Aug 13 07:53:07 2022 +0200
+
+    Add python script to draw edge cuts
+    
+    M  MyFootprints.pretty/BlackPill_STLINK_Down.kicad_mod
+    A  MyFootprints.pretty/MountingHole_1.7mm_M1.6_Pad.kicad_mod
+    A  MyFootprints.pretty/MountingHole_2.2mm_M2_ISO7380_Pad.kicad_mod
+    A  MyFootprints.pretty/PinHeader_1x04_P2.54mm_Vertical.kicad_mod
+    A  MyFootprints.pretty/PinHeader_1x08_P2.54mm_Vertical.kicad_mod
+    M  MySymbols.kicad_sym
+    M  drawborder.py
+    A  mounting-hw.kicad_sch
+    M  optical-keyboard-mx.kicad_pcb
+    M  optical-keyboard-mx.kicad_prl
+    M  optical-keyboard-mx.kicad_pro
+    M  optical-keyboard-mx.kicad_sch
+    M  placeholes.py
 
 commit 3df1c7a28eaa5f3ebec7a024c12badf12574b771
 Author: Girish Palya <girishji@gmail.com>

@@ -7656,8 +7656,92 @@
     (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/9a04973b-fd06-4d55-816d-110a788c3bee"
       (reference "J1") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
     )
-    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/88b3f5e9-a975-4d57-bf47-765bb0a6f7c9"
-      (reference "J2") (unit 1) (value "Conn_01x08") (footprint "MyFootprints:PinHeader_1x08_P2.54mm_Vertical")
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/2ab2383e-5d53-47ed-b0f9-123d3375366b"
+      (reference "J2") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/d41e79f8-876a-42f5-8488-af09ce9255b6"
+      (reference "J3") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/d86b3a5b-4eeb-45bc-b473-b3150637244d"
+      (reference "J4") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/7ca1a490-5b79-4d1e-8afc-84a474e3adc9"
+      (reference "J5") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/ba43d65e-fd40-4920-9e8d-26512428c5fe"
+      (reference "J6") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/e148b680-3a62-414f-90f5-f8605294225a"
+      (reference "J7") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/843a0a13-9e5e-486c-ab9b-5b12e1f9c85d"
+      (reference "J8") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/134487a2-5498-4f80-b2c8-d56fd9a7b53d"
+      (reference "J9") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/5a19e3da-ce0b-4c1e-9c2d-c8ad6357cf22"
+      (reference "J10") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/005c354b-f980-4970-9cc1-22ffd4e93bc2"
+      (reference "J11") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/240b82c7-ad07-41ee-b0ac-608afef797be"
+      (reference "J12") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/ea97208c-cbf8-4dc2-8b88-003172155bab"
+      (reference "J13") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/1d144c8a-f80d-4547-834e-7abc4f3a9d42"
+      (reference "J14") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/f4514369-9348-4744-88b2-3ddd96663e4a"
+      (reference "J15") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/f18781eb-42b8-4f33-90b1-f0673bf06bf8"
+      (reference "J16") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/1d6c6702-bbf9-4696-a867-0c2fcfce1609"
+      (reference "J17") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/27b0179c-3a68-4a92-8a2f-1797db95638e"
+      (reference "J18") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/b803c59b-6a64-41cc-8b36-0c2459dfface"
+      (reference "J19") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/142f97c3-3ec8-47d4-99f0-7b642f18fdcd"
+      (reference "J20") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/6dc63184-1ad3-4c0a-8228-07bb99967467"
+      (reference "J21") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/2d098eaa-e07a-488d-b582-ce395369a9ad"
+      (reference "J22") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/c9928264-490e-4f1e-80d4-7946f14a7266"
+      (reference "J23") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/09f338d2-6e08-4290-b3d9-afa3e3ca85cf"
+      (reference "J24") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/7f936a3f-d6ba-43dd-b167-42d214001673"
+      (reference "J25") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/2f5f4121-baa8-483a-b5d4-50130c79b387"
+      (reference "J26") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/9bd9fc09-5938-483a-a5a5-7bb504f83b5f"
+      (reference "J27") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/8af71694-d536-4804-9373-3e1ed88523b2"
+      (reference "J28") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/e513281b-1e52-447f-a509-a5547f2ba9bd"
+      (reference "J29") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
+    )
+    (path "/ac7bb15c-47da-4bd3-8215-3cacb14a293a/1831c6a8-aecd-4be7-9a45-13cf1262ea76"
+      (reference "J30") (unit 1) (value "Conn_01x04") (footprint "MyFootprints:PinHeader_1x04_P2.54mm_Vertical")
     )
     (path "/751b22b6-418b-4b8d-b60f-89e0b28475cd/c1a97a84-f9a8-448a-ad1d-fa5c14e8a8b6"
       (reference "M1") (unit 1) (value "LED") (footprint "Diode_SMD:D_0603_1608Metric")

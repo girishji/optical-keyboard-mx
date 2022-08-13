@@ -17,6 +17,8 @@ from pcbnew import wxPoint, wxPointMM
 import math
 import itertools
 
+BORDER = 4.0 * pcbnew.IU_PER_MM
+
 
 class Switch:
     # S, D, Q, RL
@@ -135,28 +137,42 @@ class Keyboard(object):
         offs = dim / 2 + dim * 3
         self.switches[63].place((offs + dim / 4, 4 * dim))
         place_fp((offs + dim / 4, 4 * dim), self.RP[5], rp_pos, 90)
-        self.switches[64].place((offs + dim * 1.25 + dim / 8, 4 * dim))
+
+        # self.switches[64].place((offs + dim * 1.25 + dim / 8, 4 * dim))
+        self.switches[64].place((offs + dim * 1.25 + dim / 8 + 1.4, 4 * dim + 5))
+        self.switches[64].rotate(-16)
         offs += dim * 1.25 * 2
-        self.switches[65].place((offs - 1.5, 4.5 * dim + 4))
+        # self.switches[65].place((offs - 1.5, 4.5 * dim + 4))
+        self.switches[65].place((offs - 1.0, 4.5 * dim + 7))
         # self.switches[66].rotate(-15 + 90)
         self.switches[65].rotate(-20 + 90)
+
         offs += dim * 1.25
         self.switches[66].place((offs, 4 * dim))
-        self.switches[67].place((offs + dim + dim / 4 + 1.5, 4.5 * dim + 4))
+
+        # self.switches[67].place((offs + dim + dim / 4 + 1.5, 4.5 * dim + 4))
+        self.switches[67].place((offs + dim + dim / 4 + 1.0, 4.5 * dim + 7))
         self.switches[67].rotate(20 + 90)
         offs += dim * 1.25
-        for i in range(68, 75):
-            self.switches[i].place((offs + (i - 67) * dim, 4 * dim))
+        # self.switches[68].place((offs + dim, 4 * dim))
+        self.switches[68].place((offs + dim - 1.4, 4 * dim + 5))
+        self.switches[68].rotate(16)
+        offs += dim
+
+        for i in range(69, 75):
+            self.switches[i].place((offs + (i - 68) * dim, 4 * dim))
 
         bp = board.FindFootprintByReference("U1")
-        bp.SetOrientation(0 * 10)  # 1/10 of degree
         bp.SetPosition(wxPointMM(-dim / 4 - 1.5, 3 * dim - 2.0))
 
         bp = board.FindFootprintByReference("U2")
         bp.SetOrientation(45 * 10)  # 1/10 of degree
         bp.SetPosition(wxPointMM(dim * 8, 4 * dim - 4.5))
 
-        for i in range(1, 5):
+        fp = board.FindFootprintByReference("R1")
+        fp.SetOrientation(90 * 10)  # 1/10 of degree
+        fp.SetPosition(wxPointMM(dim * 6 + 7, 4 * dim - 5))
+        for i in range(2, 5):
             fp = board.FindFootprintByReference("R" + str(i))
             fp.SetOrientation(90 * 10)  # 1/10 of degree
             fp.SetPosition(wxPointMM(dim * 8 + 17, 5 * dim - 10 - i * 4))
@@ -169,12 +185,12 @@ class Keyboard(object):
         for i, fpi in enumerate(["C3", "R5", "R6"]):
             fp = board.FindFootprintByReference(fpi)
             fp.SetOrientation(0 * 10)  # 1/10 of degree
-            fp.SetPosition(wxPointMM(dim * 8 - 2 + i * 4, 4 * dim + 1))
+            fp.SetPosition(wxPointMM(dim * 8 - 2 + i * 4, 4 * dim + 3))
 
         for i in range(1, 3):
             fp = board.FindFootprintByReference("C" + str(i))
-            fp.SetOrientation(0 * 10)  # 1/10 of degree
-            fp.SetPosition(wxPointMM(dim * 8 - 8 + i * 6, 4 * dim + 6))
+            fp.SetOrientation(90 * 10)  # 1/10 of degree
+            fp.SetPosition(wxPointMM(dim * 6 - 8 + i * 6, 4 * dim))
 
         pcbnew.Refresh()
 
@@ -405,6 +421,81 @@ class Keyboard(object):
 
         pcbnew.Refresh()
 
+    def place_conn(self):
+        board = pcbnew.GetBoard()
+        ofx, ofy, leng = 7 * 1e6, -2 * 1e6, 2.54 * 3 * 1e6
+
+        def around_hole(n, hnum, above=True, fp="H", vertical=False):
+            hl = board.FindFootprintByReference(fp + str(hnum)).GetPosition()
+            offx, offy = ofx + (2 * 1e6 if fp == "HS" else 0), ofy + (
+                2 * 1e6 if fp == "HS" else 0
+            )
+            offy = offy if above else -offy
+            if n[0]:
+                if vertical:
+                    fps[n[0]].SetOrientation(0 * 10)  # 1/10 of degree
+                    fps[n[0]].SetPosition(wxPoint(hl.x - offy, hl.y - offx - 3 * leng))
+                else:
+                    fps[n[0]].SetPosition(wxPoint(hl.x - offx - leng, hl.y + offy))
+            if n[1]:
+                if vertical:
+                    fps[n[1]].SetOrientation(0 * 10)  # 1/10 of degree
+                    fps[n[1]].SetPosition(wxPoint(hl.x - offy, hl.y + offx + leng))
+                else:
+                    fps[n[1]].SetPosition(wxPoint(hl.x + offx, hl.y + offy))
+
+        fps = {}
+        for i in range(37):
+            fps[i] = board.FindFootprintByReference("J" + str(i))
+            if fps[i]:
+                fps[i].SetOrientation(90 * 10)  # 1/10 of degree
+        around_hole([0, 1], 1)
+        around_hole([2, 3], 2)
+        around_hole([4, 5], 3)
+        around_hole([6, 0], 4)
+        around_hole([7, 0], 13, False)
+        around_hole([0, 8], 14, False)
+        around_hole([9, 10], 16, False)
+        around_hole([11, 0], 17, False)
+
+        around_hole([0, 12], 1, False, "HS")
+        around_hole([13, 0], 2, False, "HS")
+        around_hole([0, 14], 3, False, "HS")
+        around_hole([15, 0], 4, False, "HS")
+        around_hole([0, 16], 5, False, "HS")
+        around_hole([17, 0], 6, False, "HS")
+        around_hole([0, 18], 7, False, "HS")
+        around_hole([19, 0], 8, False, "HS")
+
+        around_hole([20, 0], 1, False, "HS", vertical=True)
+        around_hole([21, 0], 2, False, "HS", vertical=True)
+        around_hole([22, 0], 3, False, "HS", vertical=True)
+        around_hole([23, 0], 4, False, "HS", vertical=True)
+
+        around_hole([0, 24], 1, False, "H", vertical=True)
+        around_hole([0, 25], 4, vertical=True)
+
+        dim = self.DIM * 1e6
+        hl = board.FindFootprintByReference("S18").GetPosition()
+        fps[26].SetPosition(wxPoint(hl.x - 5 * 1e6, hl.y + dim / 2))
+        hl = board.FindFootprintByReference("S22").GetPosition()
+        fps[27].SetPosition(wxPoint(hl.x - 5 * 1e6, hl.y + dim / 2))
+        hl = board.FindFootprintByReference("S27").GetPosition()
+        fps[28].SetPosition(wxPoint(hl.x - 5 * 1e6, hl.y + dim / 2))
+
+        sw = board.FindFootprintByReference("S65")
+        hl = sw.GetPosition()
+        theta = sw.GetOrientation() // 10
+        fps[29].SetPosition(transform(wxPoint(-4 * 1e6, dim / 2 - ofy), hl, 90 - theta))
+        fps[29].SetOrientation(theta * 10)
+        sw = board.FindFootprintByReference("S67")
+        hl = sw.GetPosition()
+        theta = sw.GetOrientation() // 10
+        fps[30].SetPosition(transform(wxPoint(-4 * 1e6, dim / 2 - ofy), hl, 90 - theta))
+        fps[30].SetOrientation(theta * 10)
+
+        pcbnew.Refresh()
+
 
 def add_track(start, end, layer=pcbnew.F_Cu):
     board = pcbnew.GetBoard()
@@ -467,7 +558,19 @@ def place_fp(offset, fp, pos, orient):
     fp.SetPosition(p)
 
 
+def transform(pt, around, theta):
+    matrix = [
+        [math.cos(math.radians(theta)), -math.sin(math.radians(theta))],
+        [math.sin(math.radians(theta)), math.cos(math.radians(theta))],
+    ]
+    return wxPoint(
+        around.x + pt.x * matrix[0][0] + pt.y * matrix[0][1],
+        around.y + pt.x * matrix[1][0] + pt.y * matrix[1][1],
+    )
+
+
 kb = Keyboard()
 kb.place_footprints()
 kb.remove_tracks()
 kb.add_tracks()
+kb.place_conn()
