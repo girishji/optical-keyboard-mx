@@ -45,11 +45,10 @@ class Switch:
         self.orient()
 
     def orient(self):
-        self.footprints["S"].SetOrientation(0)  # 1/10 of degree
-        self.footprints["D"].SetOrientation(-90 * 10)  # 1/10 of degree
-        self.footprints["Q"].SetOrientation(90 * 10)  # 1/10 of degree
-        self.footprints["RL"].SetOrientation(-90 * 10)  # 1/10 of degree
-        self.footprints["M"].SetOrientation(0 * 10)  # 1/10 of degree
+        orientation = {"S": 0, "D": -90, "Q": 90, "RL": -90, "M": 0}
+        for sym, fp in self.footprints.items():
+            if fp:
+                fp.SetOrientation(orientation[sym] * 10)
 
     def get_pad_center(self, fp, pad_num):
         return self.footprints[fp].FindPadByNumber(str(pad_num)).GetCenter()
@@ -57,24 +56,31 @@ class Switch:
     def add_tracks(self):
         sta = self.get_pad_center("D", 2)
         end = self.get_pad_center("RL", 2)
-        r = end.y - sta.y
-        ctr = wxPoint(sta.x + r, sta.y)
+        ref = self.footprints["S"].GetPosition()
+        theta = -1 * self.footprints["S"].GetOrientation() // 10
+        sta1 = transform(wxPoint(sta.x - ref.x, sta.y - ref.y), ref, -theta)
+        end1 = transform(wxPoint(end.x - ref.x, end.y - ref.y), ref, -theta)
+        r = end1.y - sta1.y
+        ctr = wxPoint(sta1.x + r, sta1.y)
         mid = wxPoint(ctr.x - r / math.sqrt(2), ctr.y + r / math.sqrt(2))
-        end1 = wxPoint(sta.x + r, sta.y + r)
-        add_arc(sta, end1, mid)
-        add_track(end1, end)
+        end2 = wxPoint(sta1.x + r, sta1.y + r)
+        end3 = transform(wxPoint(end2.x - ref.x, end2.y - ref.y), ref, theta)
+        add_arc(sta, end3, mid)
+        add_track(end3, end)
 
     def place(self, offset):
         for fp in self._pos.keys():
-            p = wxPointMM(
-                Switch._pos[fp][0] + offset[0], Switch._pos[fp][1] + offset[1]
-            )
-            self.footprints[fp].SetPosition(p)
+            if self.footprints[fp]:
+                p = wxPointMM(
+                    Switch._pos[fp][0] + offset[0], Switch._pos[fp][1] + offset[1]
+                )
+                self.footprints[fp].SetPosition(p)
 
     def rotate(self, deg):
         p = self.footprints["S"].GetPosition()
         for _, fp in self.footprints.items():
-            fp.Rotate(p, deg * 10)
+            if fp:
+                fp.Rotate(p, deg * 10)
 
 
 class Keyboard(object):
@@ -163,34 +169,36 @@ class Keyboard(object):
             self.switches[i].place((offs + (i - 68) * dim, 4 * dim))
 
         bp = board.FindFootprintByReference("U1")
-        bp.SetPosition(wxPointMM(-dim / 4 - 1.5, 3 * dim - 2.0))
+        if bp:
+            bp.SetPosition(wxPointMM(-dim / 4 - 1.5, 3 * dim - 2.0))
 
         bp = board.FindFootprintByReference("U2")
-        bp.SetOrientation(45 * 10)  # 1/10 of degree
-        bp.SetPosition(wxPointMM(dim * 8, 4 * dim - 4.5))
+        if bp:
+            bp.SetOrientation(45 * 10)  # 1/10 of degree
+            bp.SetPosition(wxPointMM(dim * 8, 4 * dim - 4.5))
 
-        fp = board.FindFootprintByReference("R1")
-        fp.SetOrientation(90 * 10)  # 1/10 of degree
-        fp.SetPosition(wxPointMM(dim * 6 + 7, 4 * dim - 5))
-        for i in range(2, 5):
-            fp = board.FindFootprintByReference("R" + str(i))
+            fp = board.FindFootprintByReference("R1")
             fp.SetOrientation(90 * 10)  # 1/10 of degree
-            fp.SetPosition(wxPointMM(dim * 8 + 17, 5 * dim - 10 - i * 4))
+            fp.SetPosition(wxPointMM(dim * 6 + 7, 4 * dim - 5))
+            for i in range(2, 5):
+                fp = board.FindFootprintByReference("R" + str(i))
+                fp.SetOrientation(90 * 10)  # 1/10 of degree
+                fp.SetPosition(wxPointMM(dim * 8 + 17, 5 * dim - 10 - i * 4))
 
-        for i in range(4, 6):
-            fp = board.FindFootprintByReference("C" + str(i))
-            fp.SetOrientation(0 * 10)  # 1/10 of degree
-            fp.SetPosition(wxPointMM(dim * 8 + 12, 5 * dim - i * 5))
+            for i in range(4, 6):
+                fp = board.FindFootprintByReference("C" + str(i))
+                fp.SetOrientation(0 * 10)  # 1/10 of degree
+                fp.SetPosition(wxPointMM(dim * 8 + 12, 5 * dim - i * 5))
 
-        for i, fpi in enumerate(["C3", "R5", "R6"]):
-            fp = board.FindFootprintByReference(fpi)
-            fp.SetOrientation(0 * 10)  # 1/10 of degree
-            fp.SetPosition(wxPointMM(dim * 8 - 2 + i * 4, 4 * dim + 3))
+            for i, fpi in enumerate(["C3", "R5", "R6"]):
+                fp = board.FindFootprintByReference(fpi)
+                fp.SetOrientation(0 * 10)  # 1/10 of degree
+                fp.SetPosition(wxPointMM(dim * 8 - 2 + i * 4, 4 * dim + 3))
 
-        for i in range(1, 3):
-            fp = board.FindFootprintByReference("C" + str(i))
-            fp.SetOrientation(90 * 10)  # 1/10 of degree
-            fp.SetPosition(wxPointMM(dim * 6 - 8 + i * 6, 4 * dim))
+            for i in range(1, 3):
+                fp = board.FindFootprintByReference("C" + str(i))
+                fp.SetOrientation(90 * 10)  # 1/10 of degree
+                fp.SetPosition(wxPointMM(dim * 6 - 8 + i * 6, 4 * dim))
 
         pcbnew.Refresh()
 
@@ -222,18 +230,22 @@ class Keyboard(object):
 
     def add_tracks(self):
 
+        # return if this is switch plate and not pcb
+        if not self.switches[1].footprints["RL"]:
+            return
+
         # add tracks
         for i in range(1, 75):
-            if i not in [65, 67]:
-                self.switches[i].add_tracks()
+            self.switches[i].add_tracks()
 
+        # rows
         for i in itertools.chain(
             range(1, 15),
             range(16, 29),
             range(30, 44),
             range(45, 59),
-            range(60, 64),
-            range(68, 74),
+            range(60, 63),
+            range(69, 74),
         ):
 
             sta = self.switches[i].get_pad_center("Q", 1)
@@ -273,7 +285,7 @@ class Keyboard(object):
                 end2, end3 = sta, end
             add_track(end2, end3, pcbnew.B_Cu)
 
-        exclude = [65, 67, -1]
+        exclude = [64, 65, 67, 68, -1]
         for i1, i2, i3, i4, i5 in list(
             zip(
                 range(1, 16),
@@ -553,9 +565,10 @@ def add_arc_from(sta, xp, yp, reverse=True, d=Switch._radius, layer=pcbnew.F_Cu)
 
 
 def place_fp(offset, fp, pos, orient):
-    fp.SetOrientation(orient * 10)  # 1/10 of degree
-    p = wxPointMM(pos[0] + offset[0], pos[1] + offset[1])
-    fp.SetPosition(p)
+    if fp:
+        fp.SetOrientation(orient * 10)  # 1/10 of degree
+        p = wxPointMM(pos[0] + offset[0], pos[1] + offset[1])
+        fp.SetPosition(p)
 
 
 def transform(pt, around, theta):
@@ -573,4 +586,4 @@ kb = Keyboard()
 kb.place_footprints()
 kb.remove_tracks()
 kb.add_tracks()
-kb.place_conn()
+# kb.place_conn()

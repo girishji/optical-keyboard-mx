@@ -4,7 +4,7 @@
   (descr "Mounting Hole 2.2mm, M2")
   (tags "mounting hole 2.2mm m2")
   (attr exclude_from_pos_files exclude_from_bom)
-  (fp_text reference "REF**" (at 0 -3.2) (layer "F.SilkS")
+  (fp_text reference "REF**" (at 0 -3.2) (layer "F.SilkS") hide
     (effects (font (size 1 1) (thickness 0.15)))
     (tstamp 04f681cf-527e-4929-943d-4952fd6cd3fb)
   )
