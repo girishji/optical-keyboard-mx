@@ -46,7 +46,7 @@
     (property "Value" "MountingHoleSprt" (id 1) (at 88.9 69.0122 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "MyFootprints:MountingHole_2.2mm_M2_jlcpcb" (id 2) (at 86.36 67.31 0)
+    (property "Footprint" "MyFootprints:MountingHole_2.2mm_M2_ISO7380_Pad" (id 2) (at 86.36 67.31 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 86.36 67.31 0)
@@ -63,7 +63,7 @@
     (property "Value" "MountingHoleSprt" (id 1) (at 100.33 69.0122 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "MyFootprints:MountingHole_2.2mm_M2_jlcpcb" (id 2) (at 97.79 67.31 0)
+    (property "Footprint" "MyFootprints:MountingHole_2.2mm_M2_ISO7380_Pad" (id 2) (at 97.79 67.31 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 97.79 67.31 0)
@@ -80,7 +80,7 @@
     (property "Value" "MountingHoleSprt" (id 1) (at 77.47 69.0122 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "MyFootprints:MountingHole_2.2mm_M2_jlcpcb" (id 2) (at 74.93 67.31 0)
+    (property "Footprint" "MyFootprints:MountingHole_2.2mm_M2_ISO7380_Pad" (id 2) (at 74.93 67.31 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 74.93 67.31 0)
@@ -97,7 +97,7 @@
     (property "Value" "MountingHoleSprt" (id 1) (at 66.04 69.0122 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "MyFootprints:MountingHole_2.2mm_M2_jlcpcb" (id 2) (at 63.5 67.31 0)
+    (property "Footprint" "MyFootprints:MountingHole_2.2mm_M2_ISO7380_Pad" (id 2) (at 63.5 67.31 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 63.5 67.31 0)
@@ -111,16 +111,16 @@
 
   (symbol_instances
     (path "/de802840-e6bf-4733-8fb7-6ceb379d06d2"
-      (reference "HS1") (unit 1) (value "MountingHoleSprt") (footprint "MyFootprints:MountingHole_2.2mm_M2_jlcpcb")
+      (reference "HS1") (unit 1) (value "MountingHoleSprt") (footprint "MyFootprints:MountingHole_2.2mm_M2_ISO7380_Pad")
     )
     (path "/7b389730-92d7-4079-9df3-df7004eb26b8"
-      (reference "HS2") (unit 1) (value "MountingHoleSprt") (footprint "MyFootprints:MountingHole_2.2mm_M2_jlcpcb")
+      (reference "HS2") (unit 1) (value "MountingHoleSprt") (footprint "MyFootprints:MountingHole_2.2mm_M2_ISO7380_Pad")
     )
     (path "/69976d14-2978-4dda-85dc-df37583aa900"
-      (reference "HS3") (unit 1) (value "MountingHoleSprt") (footprint "MyFootprints:MountingHole_2.2mm_M2_jlcpcb")
+      (reference "HS3") (unit 1) (value "MountingHoleSprt") (footprint "MyFootprints:MountingHole_2.2mm_M2_ISO7380_Pad")
     )
     (path "/718cd874-b021-4fb3-960d-ba4bffb2786f"
-      (reference "HS4") (unit 1) (value "MountingHoleSprt") (footprint "MyFootprints:MountingHole_2.2mm_M2_jlcpcb")
+      (reference "HS4") (unit 1) (value "MountingHoleSprt") (footprint "MyFootprints:MountingHole_2.2mm_M2_ISO7380_Pad")
     )
   )
 )

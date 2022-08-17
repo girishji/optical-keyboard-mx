@@ -213,8 +213,10 @@ class Keyboard(object):
         board = pcbnew.GetBoard()
         via = pcbnew.PCB_VIA(board)
         via.SetPosition(loc)
-        via.SetDrill(int(0.3 * 1e6))
-        via.SetWidth(int(0.6 * 1e6))
+        # via.SetDrill(int(0.3 * 1e6))
+        # via.SetWidth(int(0.6 * 1e6))
+        via.SetDrill(int(0.4 * 1e6))
+        via.SetWidth(int(0.8 * 1e6))
         board.Add(via)
 
     def via_track(self, point, offset=-0.9, reverse=False, vertical=False):
@@ -514,7 +516,7 @@ def add_track(start, end, layer=pcbnew.F_Cu):
     track = pcbnew.PCB_TRACK(board)
     track.SetStart(start)
     track.SetEnd(end)
-    track.SetWidth(int(0.3 * 1e6))
+    track.SetWidth(int(0.25 * 1e6))
     track.SetLayer(layer)
     board.Add(track)
 
@@ -525,7 +527,7 @@ def add_arc(start, end, mid, layer=pcbnew.F_Cu):
     track.SetStart(start)
     track.SetEnd(end)
     track.SetMid(mid)
-    track.SetWidth(int(0.3 * 1e6))
+    track.SetWidth(int(0.25 * 1e6))
     track.SetLayer(layer)
     board.Add(track)
 

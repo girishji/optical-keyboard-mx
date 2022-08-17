@@ -4,6 +4,7 @@
 optical-keyboard-mx-backups/
 
 *.zip
+.DS_Store
 
 # Temporary files
 *.000

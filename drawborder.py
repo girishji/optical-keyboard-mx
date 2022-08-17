@@ -42,7 +42,7 @@ def add_line(start, end, layer=pcbnew.Edge_Cuts):
     ls.SetStart(start)
     ls.SetEnd(end)
     ls.SetLayer(layer)
-    ls.SetWidth(int(0.1 * pcbnew.IU_PER_MM))
+    # ls.SetWidth(int(0.1 * pcbnew.IU_PER_MM))
     board.Add(ls)
 
 
@@ -54,7 +54,7 @@ def add_line_arc(start, center, reverse=False, angle=-90, layer=pcbnew.Edge_Cuts
     arc.SetCenter(center)
     arc.SetArcAngleAndEnd(-angle * 10, reverse)
     arc.SetLayer(layer)
-    arc.SetWidth(int(0.1 * pcbnew.IU_PER_MM))
+    # arc.SetWidth(int(0.1 * pcbnew.IU_PER_MM))
     board.Add(arc)
 
 
