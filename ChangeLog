@@ -1,66 +1,89 @@
 Author: Girish Palya <girishji@gmail.com>
-Date:   Wed, 17 Aug 2022 21:07:53 +0200
+Date:   Thu, 18 Aug 2022 09:59:35 +0200
 
-Add gerbers and assembly files
+Reverse polarities of capacitor
 
 
 
-M  .gitignore
-M  MyFootprints.pretty/MountingHole_2.2mm_M2_ISO7380_Pad.kicad_mod
-M  MySymbols.kicad_sym
-M  README.md
-M  drawborder.py
-A  jlcpcb/gerber/optical-keyboard-mx-B_Cu.gbl
-A  jlcpcb/gerber/optical-keyboard-mx-B_Mask.gbs
-A  jlcpcb/gerber/optical-keyboard-mx-B_Paste.gbp
-A  jlcpcb/gerber/optical-keyboard-mx-B_Silkscreen.gbo
-A  jlcpcb/gerber/optical-keyboard-mx-Edge_Cuts.gm1
-A  jlcpcb/gerber/optical-keyboard-mx-F_Cu.gtl
-A  jlcpcb/gerber/optical-keyboard-mx-F_Mask.gts
-A  jlcpcb/gerber/optical-keyboard-mx-F_Paste.gtp
-A  jlcpcb/gerber/optical-keyboard-mx-F_Silkscreen.gto
-A  jlcpcb/gerber/optical-keyboard-mx-NPTH-drl_map.gbr
-A  jlcpcb/gerber/optical-keyboard-mx-NPTH.drl
-A  jlcpcb/gerber/optical-keyboard-mx-PTH-drl_map.gbr
-A  jlcpcb/gerber/optical-keyboard-mx-PTH.drl
+M  jlcpcb/gerber/optical-keyboard-mx-B_Cu.gbl
+M  jlcpcb/gerber/optical-keyboard-mx-B_Mask.gbs
+M  jlcpcb/gerber/optical-keyboard-mx-B_Paste.gbp
+M  jlcpcb/gerber/optical-keyboard-mx-B_Silkscreen.gbo
+M  jlcpcb/gerber/optical-keyboard-mx-Edge_Cuts.gm1
+M  jlcpcb/gerber/optical-keyboard-mx-F_Cu.gtl
+M  jlcpcb/gerber/optical-keyboard-mx-F_Mask.gts
+M  jlcpcb/gerber/optical-keyboard-mx-F_Paste.gtp
+M  jlcpcb/gerber/optical-keyboard-mx-F_Silkscreen.gto
+M  jlcpcb/gerber/optical-keyboard-mx-NPTH-drl_map.gbr
+M  jlcpcb/gerber/optical-keyboard-mx-NPTH.drl
+M  jlcpcb/gerber/optical-keyboard-mx-PTH-drl_map.gbr
+M  jlcpcb/gerber/optical-keyboard-mx-PTH.drl
 M  led_driver.kicad_sch
-M  mounting-hw.kicad_sch
 M  optical-keyboard-mx.kicad_pcb
-M  optical-keyboard-mx.kicad_sch
-M  placefp.py
-M  switch-plate/.gitignore
-A  switch-plate/jlcpcb/gerber/switch-plate-B_Cu.gbl
-A  switch-plate/jlcpcb/gerber/switch-plate-B_Mask.gbs
-A  switch-plate/jlcpcb/gerber/switch-plate-B_Paste.gbp
-A  switch-plate/jlcpcb/gerber/switch-plate-B_Silkscreen.gbo
-A  switch-plate/jlcpcb/gerber/switch-plate-Edge_Cuts.gm1
-A  switch-plate/jlcpcb/gerber/switch-plate-F_Cu.gtl
-A  switch-plate/jlcpcb/gerber/switch-plate-F_Mask.gts
-A  switch-plate/jlcpcb/gerber/switch-plate-F_Paste.gtp
-A  switch-plate/jlcpcb/gerber/switch-plate-F_Silkscreen.gto
-A  switch-plate/jlcpcb/gerber/switch-plate-NPTH-drl_map.gbr
-A  switch-plate/jlcpcb/gerber/switch-plate-NPTH.drl
-A  switch-plate/jlcpcb/gerber/switch-plate-PTH-drl_map.gbr
-A  switch-plate/jlcpcb/gerber/switch-plate-PTH.drl
-M  switch-plate/switch-plate.kicad_pcb
-M  switch-plate/switch-plate.kicad_prl
-M  switch.kicad_sch
-M  wrist-support/.gitignore
-A  wrist-support/jlcpcb/gerber/wrist-support-B_Cu.gbl
-A  wrist-support/jlcpcb/gerber/wrist-support-B_Mask.gbs
-A  wrist-support/jlcpcb/gerber/wrist-support-B_Paste.gbp
-A  wrist-support/jlcpcb/gerber/wrist-support-B_Silkscreen.gbo
-A  wrist-support/jlcpcb/gerber/wrist-support-Edge_Cuts.gm1
-A  wrist-support/jlcpcb/gerber/wrist-support-F_Cu.gtl
-A  wrist-support/jlcpcb/gerber/wrist-support-F_Mask.gts
-A  wrist-support/jlcpcb/gerber/wrist-support-F_Paste.gtp
-A  wrist-support/jlcpcb/gerber/wrist-support-F_Silkscreen.gto
-A  wrist-support/jlcpcb/gerber/wrist-support-NPTH-drl_map.gbr
-A  wrist-support/jlcpcb/gerber/wrist-support-NPTH.drl
-A  wrist-support/jlcpcb/gerber/wrist-support-PTH-drl_map.gbr
-A  wrist-support/jlcpcb/gerber/wrist-support-PTH.drl
-M  wrist-support/wrist-support.kicad_pcb
-M  wrist-support/wrist-support.kicad_sch
+M  optical-keyboard-mx.kicad_prl
+
+commit 25764642e75d2b94b622d0dd7a595334a586fb87
+Author: Girish Palya <girishji@gmail.com>
+Date:   Wed Aug 17 21:07:53 2022 +0200
+
+    Add gerbers and assembly files
+    
+    M  .gitignore
+    M  MyFootprints.pretty/MountingHole_2.2mm_M2_ISO7380_Pad.kicad_mod
+    M  MySymbols.kicad_sym
+    M  README.md
+    M  drawborder.py
+    A  jlcpcb/gerber/optical-keyboard-mx-B_Cu.gbl
+    A  jlcpcb/gerber/optical-keyboard-mx-B_Mask.gbs
+    A  jlcpcb/gerber/optical-keyboard-mx-B_Paste.gbp
+    A  jlcpcb/gerber/optical-keyboard-mx-B_Silkscreen.gbo
+    A  jlcpcb/gerber/optical-keyboard-mx-Edge_Cuts.gm1
+    A  jlcpcb/gerber/optical-keyboard-mx-F_Cu.gtl
+    A  jlcpcb/gerber/optical-keyboard-mx-F_Mask.gts
+    A  jlcpcb/gerber/optical-keyboard-mx-F_Paste.gtp
+    A  jlcpcb/gerber/optical-keyboard-mx-F_Silkscreen.gto
+    A  jlcpcb/gerber/optical-keyboard-mx-NPTH-drl_map.gbr
+    A  jlcpcb/gerber/optical-keyboard-mx-NPTH.drl
+    A  jlcpcb/gerber/optical-keyboard-mx-PTH-drl_map.gbr
+    A  jlcpcb/gerber/optical-keyboard-mx-PTH.drl
+    M  led_driver.kicad_sch
+    M  mounting-hw.kicad_sch
+    M  optical-keyboard-mx.kicad_pcb
+    M  optical-keyboard-mx.kicad_sch
+    M  placefp.py
+    M  switch-plate/.gitignore
+    A  switch-plate/jlcpcb/gerber/switch-plate-B_Cu.gbl
+    A  switch-plate/jlcpcb/gerber/switch-plate-B_Mask.gbs
+    A  switch-plate/jlcpcb/gerber/switch-plate-B_Paste.gbp
+    A  switch-plate/jlcpcb/gerber/switch-plate-B_Silkscreen.gbo
+    A  switch-plate/jlcpcb/gerber/switch-plate-Edge_Cuts.gm1
+    A  switch-plate/jlcpcb/gerber/switch-plate-F_Cu.gtl
+    A  switch-plate/jlcpcb/gerber/switch-plate-F_Mask.gts
+    A  switch-plate/jlcpcb/gerber/switch-plate-F_Paste.gtp
+    A  switch-plate/jlcpcb/gerber/switch-plate-F_Silkscreen.gto
+    A  switch-plate/jlcpcb/gerber/switch-plate-NPTH-drl_map.gbr
+    A  switch-plate/jlcpcb/gerber/switch-plate-NPTH.drl
+    A  switch-plate/jlcpcb/gerber/switch-plate-PTH-drl_map.gbr
+    A  switch-plate/jlcpcb/gerber/switch-plate-PTH.drl
+    M  switch-plate/switch-plate.kicad_pcb
+    M  switch-plate/switch-plate.kicad_prl
+    M  switch.kicad_sch
+    M  wrist-support/.gitignore
+    A  wrist-support/jlcpcb/gerber/wrist-support-B_Cu.gbl
+    A  wrist-support/jlcpcb/gerber/wrist-support-B_Mask.gbs
+    A  wrist-support/jlcpcb/gerber/wrist-support-B_Paste.gbp
+    A  wrist-support/jlcpcb/gerber/wrist-support-B_Silkscreen.gbo
+    A  wrist-support/jlcpcb/gerber/wrist-support-Edge_Cuts.gm1
+    A  wrist-support/jlcpcb/gerber/wrist-support-F_Cu.gtl
+    A  wrist-support/jlcpcb/gerber/wrist-support-F_Mask.gts
+    A  wrist-support/jlcpcb/gerber/wrist-support-F_Paste.gtp
+    A  wrist-support/jlcpcb/gerber/wrist-support-F_Silkscreen.gto
+    A  wrist-support/jlcpcb/gerber/wrist-support-NPTH-drl_map.gbr
+    A  wrist-support/jlcpcb/gerber/wrist-support-NPTH.drl
+    A  wrist-support/jlcpcb/gerber/wrist-support-PTH-drl_map.gbr
+    A  wrist-support/jlcpcb/gerber/wrist-support-PTH.drl
+    M  wrist-support/wrist-support.kicad_pcb
+    M  wrist-support/wrist-support.kicad_sch
 
 commit 195550c76140d7cb4d4e0af7d7f9162d8d8fb02f
 Author: Girish Palya <girishji@gmail.com>
