@@ -10,7 +10,7 @@ Each row is connected to a GPIO pin configured as input so that voltage drop
 across the load register of PT (Phototransistor) can be read.
 
 QMK code is in a [PR](https://github.com/qmk/qmk_firmware/pull/17852). In the
-qmk tree you could find it in keyboards/opticalkb/rev1 folder.
+qmk tree you could find it in `keyboards/opticalkb/rev1` folder.
 
 This is not a high-performance keyboard since IR's are provided with very
 minimal current (way below the suggested operating value). This is done so as
@@ -31,7 +31,9 @@ It takes minimal effort to put together this keyboard. When you order from
 jlcpcb have them assemble only 2 (out of 5) pcbs with SMD components (choose
 green FR4). The other pcb's can be used as base plates. The two pcb's (one
 with SMD assembly and one without) are soldered together using a special type
-of tin-coated standoff. The switch plate is then screwed at the top. There is
+of tin-coated standoff. If you are using a heatgun use solder paste generously.
+If using soldering iron solder from back of the standoff also.
+Then screw the switch plate on top. There is
 also a wrist rest. You can eliminate the wrist area completely by editing the
 edge-cuts layer of main pcb. All pcb's are 1.6 mm thickness.
 
@@ -57,5 +59,3 @@ For wrist support:
 ![PCB](https://i.imgur.com/2z5SLGM.png)
 ![Switch plate](https://i.imgur.com/m8c4q6x.png)
 ![Wrist rest](https://i.imgur.com/8WCkxZB.png)
-
-
