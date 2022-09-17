@@ -18,9 +18,7 @@ import math
 
 
 DIM = 19.0 * pcbnew.IU_PER_MM
-# RADIUS = 2.0 * pcbnew.IU_PER_MM
 RADIUS = 3.0 * pcbnew.IU_PER_MM
-# BORDER = 5.5 * pcbnew.IU_PER_MM
 BORDER = 4.0 * pcbnew.IU_PER_MM
 HOLE_OFFSET = 1.0 * pcbnew.IU_PER_MM
 
