@@ -1,4 +1,4 @@
-# Optical Keyboard using Gateron MX Optical Switches
+# Baremetal Optical Keyboard Using Gateron MX Optical Switches
 
 
 Optical keyboard PCB based on Gateron MX optical switches (KiCad project).
@@ -35,7 +35,7 @@ of tin-coated standoff. If you are using a heatgun use solder paste generously.
 If using soldering iron solder from back of the standoff also.
 Then screw the switch plate on top. There is
 also a wrist rest. You can eliminate the wrist area completely by editing the
-edge-cuts layer of main pcb. All pcb's are 1.6 mm thickness.
+*Edge Cuts* layer of main pcb. All pcb's are 1.6 mm thickness.
 
 All the part numbers (of jlcpcb) are embedded in the symbols so you can generate BOM.
 
