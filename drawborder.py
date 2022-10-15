@@ -1,8 +1,6 @@
 # Copyright (C) 2022 Girish Palya <girishji@gmail.com>
 # License: https://opensource.org/licenses/MIT
 #
-# Console script to place mouting holes
-#
 # To run as script in python console,
 #   place or symplink this script to ~/Documents/KiCad/6.0/scripting/plugins
 #   Run from python console using 'import filename'
